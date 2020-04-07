@@ -18,6 +18,10 @@ public class PlayerController : MonoBehaviour
     public GameObject Panel;
     public GameObject WorldText;
     public Button NextLevel;
+    public AudioSource AudioPlayer;
+    public AudioClip JumpSFX;
+    public AudioClip PointSFX;
+
     public string SceneToLoad;
 
     public float HorizontalAxis;
@@ -60,6 +64,7 @@ public class PlayerController : MonoBehaviour
         if (IsGrounded && JumpDown)
         {
             IsJumping = true;
+            AudioPlayer.PlayOneShot(JumpSFX);
             JumpTimeCounter = JumpTime;
             rb.velocity = Vector2.up * JumpForce;
         }
@@ -121,6 +126,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Go to main menu
+        if (Input.GetButton("Cancel"))
+            SceneManager.LoadScene("Main Menu");
+
         //Movement
         rb.velocity = new Vector2(HorizontalAxis * Speed, rb.velocity.y);
     }
@@ -130,6 +139,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Point")
         {
             this.Points += 1;
+            AudioPlayer.PlayOneShot(PointSFX);
             PointsText.text = $"{Points}/{MaxPointsNeeded}";
         }
         else if (collision.gameObject.tag == "Finish" && Points >= MaxPointsNeeded)
