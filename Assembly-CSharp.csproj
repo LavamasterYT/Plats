@@ -63,13 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CameraSettings.cs" />
+    <Compile Include="Assets\Scripts\GetNumberOfDeaths.cs" />
     <Compile Include="Assets\Scripts\INIParser.cs" />
     <Compile Include="Assets\Scripts\JumpOrb.cs" />
+    <Compile Include="Assets\Scripts\LoadLevel.cs" />
     <Compile Include="Assets\Scripts\LoadNextLevel.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MusicManager.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\PostProcessingSettings.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Plats/Source/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

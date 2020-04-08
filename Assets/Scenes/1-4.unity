@@ -315,6 +315,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88b35555dc39689419d1bfb58fe374df, type: 3}
+--- !u!1 &27236535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6621464705094478444, guid: 88b35555dc39689419d1bfb58fe374df,
+    type: 3}
+  m_PrefabInstance: {fileID: 27236534}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &27834981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -748,10 +754,25 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2212529598938184259, guid: 4183ae790f4cc414c8de889de629428f,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1683335704}
     - target: {fileID: 2212529598938184382, guid: 4183ae790f4cc414c8de889de629428f,
         type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212529599697634930, guid: 4183ae790f4cc414c8de889de629428f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.00000095367
+      objectReference: {fileID: 0}
+    - target: {fileID: 2212529599697634930, guid: 4183ae790f4cc414c8de889de629428f,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 102
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4183ae790f4cc414c8de889de629428f, type: 3}
@@ -897,6 +918,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Post Processing
       objectReference: {fileID: 0}
+    - target: {fileID: 6893535058237666902, guid: 82b7626ea17d618449fb2f03d9a361f7,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 27236535}
     - target: {fileID: 6893535058237666903, guid: 82b7626ea17d618449fb2f03d9a361f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -954,6 +980,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82b7626ea17d618449fb2f03d9a361f7, type: 3}
+--- !u!20 &1683335704 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6893535058237666890, guid: 82b7626ea17d618449fb2f03d9a361f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 1683335703}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1714238757
 PrefabInstance:
   m_ObjectHideFlags: 0

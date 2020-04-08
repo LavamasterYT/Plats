@@ -233,7 +233,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 76346506279c41b4082e975055f4ff55, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &6621464705094478450
 MonoBehaviour:
@@ -274,6 +274,7 @@ MonoBehaviour:
   JumpDown: 0
   JumpUp: 0
   IsJumping: 0
+  DisableGravity: 0
 --- !u!82 &39725058920225394
 AudioSource:
   m_ObjectHideFlags: 0
@@ -286,7 +287,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.232
   m_Pitch: 1
   Loop: 0
   Mute: 0

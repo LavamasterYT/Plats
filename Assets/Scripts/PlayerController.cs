@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public float JumpRadius = 10f;
     public float JumpForce = 5f;
     public float JumpTimeCounter;
-    public float OutOfBoundsY = -4.3f;
+    public float OutOfBoundsY = -5;
     public float JumpTime = 0.35f;
 
     public int Points;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     public bool JumpDown;
     public bool JumpUp;
     public bool IsJumping;
+    public bool DisableGravity = false;
 
     void Start()
     {
@@ -54,36 +55,9 @@ public class PlayerController : MonoBehaviour
     {
         //Handling Input
         HorizontalAxis = Input.GetAxisRaw("Horizontal");
-        Jump = Input.GetButton("Jump");
-        JumpDown = Input.GetButtonDown("Jump");
-        JumpUp = Input.GetButtonUp("Jump");
-
-        //Jump
-        IsGrounded = Physics2D.OverlapCircle(FeetPos.position, JumpRadius, WhatIsGround);
-
-        if (IsGrounded && JumpDown)
-        {
-            IsJumping = true;
-            AudioPlayer.PlayOneShot(JumpSFX);
-            JumpTimeCounter = JumpTime;
-            rb.velocity = Vector2.up * JumpForce;
-        }
-
-        if (Jump && IsJumping)
-        {
-            if (JumpTimeCounter > 0)
-            {
-                rb.velocity = Vector2.up * JumpForce;
-                JumpTimeCounter -= Time.deltaTime;
-            }
-            else
-            {
-                IsJumping = false;
-            }
-        }
-
-        if (JumpUp)
-            IsJumping = false;
+        Jump = (Input.GetButton("Jump") || Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W)) ? true : false;
+        JumpDown = (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) ? true : false;
+        JumpUp = (Input.GetButtonUp("Jump") || Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.W)) ? true : false;
 
         //Animations and flipping---------------------------------------
 
@@ -122,6 +96,16 @@ public class PlayerController : MonoBehaviour
         //Out of Bounds
         if (transform.position.y <= OutOfBoundsY)
             GameOver();
+
+        //Disable gravity
+        if (Input.GetKeyDown(KeyCode.ScrollLock))
+        {
+            DisableGravity = !DisableGravity;
+            if (DisableGravity == false)
+            {
+                rb.gravityScale = 5f;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -130,8 +114,47 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButton("Cancel"))
             SceneManager.LoadScene("Main Menu");
 
+        //Jump
+        IsGrounded = Physics2D.OverlapCircle(FeetPos.position, JumpRadius, WhatIsGround);
+
+        if (JumpDown)
+        {
+            AudioPlayer.PlayOneShot(JumpSFX);
+        }
+
+        if (IsGrounded && JumpDown && !DisableGravity)
+        {
+            IsJumping = true;
+            JumpTimeCounter = JumpTime;
+            rb.velocity = Vector2.up * JumpForce;
+        }
+
+        if (Jump && IsJumping && !DisableGravity)
+        {
+            if (JumpTimeCounter > 0)
+            {
+                rb.velocity = Vector2.up * JumpForce;
+                JumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                IsJumping = false;
+            }
+        }
+
+        if (JumpUp)
+            IsJumping = false;
+
         //Movement
-        rb.velocity = new Vector2(HorizontalAxis * Speed, rb.velocity.y);
+        if (DisableGravity)
+        {
+            rb.gravityScale = 0f;
+            rb.velocity = new Vector2(HorizontalAxis * Speed, Input.GetAxisRaw("Vertical") * Speed);
+        }
+        else
+        {
+            rb.velocity = new Vector2(HorizontalAxis * Speed, rb.velocity.y);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -150,6 +173,7 @@ public class PlayerController : MonoBehaviour
 
     void GameOver()
     {
+        PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths", 0) + 1);
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 

@@ -19,7 +19,7 @@ public class JumpOrb : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collision detected");
-        AudioPlayer.PlayOneShot(PickUpPointSFX);
+        //AudioPlayer.PlayOneShot(PickUpPointSFX);
         if (collision.gameObject.name == "player_base")
         {
             HasCollided = false;

@@ -35,12 +35,15 @@ public class MainMenu : MonoBehaviour
         //Set values for sliders
         BloomSlider.value = PlayerPrefs.GetFloat("Bloom", 1f);
         VignetteSlider.value = PlayerPrefs.GetFloat("Vignette", 0.64f);
+        PlayerPrefs.SetFloat("Size", 5f);
+        PlayerPrefs.SetInt("FollowPlayer", 0);
 
         //Listeners
         BloomSlider.onValueChanged.AddListener(BloomChanged);
         VignetteSlider.onValueChanged.AddListener(VignetteChanged);
         PlayButton.onClick.AddListener(OnPlayButton);
         ResetSettings.onClick.AddListener(OnResetButton);
+        Exit.onClick.AddListener(OnExitButton);
     }
 
     private void Update()
@@ -61,6 +64,9 @@ public class MainMenu : MonoBehaviour
             Cam.orthographicSize = Mathf.Lerp(Cam.orthographicSize, Zoom, Time.deltaTime * Smoothness);
             
         }
+
+        if (Input.GetKey(KeyCode.L))
+            SceneManager.LoadScene("Load Level");
     }
 
     public void LoadScene()
@@ -94,6 +100,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnExitButton()
     {
-        Application.Quit();
+        Debug.Log("Exiting");
+        Application.Quit(0);
     }
 }

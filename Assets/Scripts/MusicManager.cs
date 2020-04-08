@@ -8,4 +8,9 @@ public class MusicManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
     }
+
+    private void Start()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Main Menu");
+    }
 }
